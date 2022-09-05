@@ -1,6 +1,6 @@
 import div_fact as div
 
-
+#seno de x
 def sin_t(x):
     sk = 0.0
     for i in range(0, 2500):
@@ -16,7 +16,7 @@ def sin_t(x):
             break
     return sk
 
-
+#coseno de x
 def cos_t(x):
     sk = 0.0
     for i in range(0, 2500):
@@ -33,7 +33,7 @@ def cos_t(x):
             break
     return sk
 
-
+#tangente de x
 def tan_t(x):
     numerador = sin_t(x)
     denominador = cos_t(x)
@@ -43,7 +43,7 @@ def tan_t(x):
         division = div.div_t(denominador)
         return numerador * division
 
-
+#secante de x
 def sec_t(x):
     coseno = cos_t(x)
     if coseno == 0:
@@ -51,7 +51,7 @@ def sec_t(x):
     else:
         return div.div_t(coseno)
 
-
+#cosecante de x
 def csc_t(x):
     seno = sin_t(x)
     if seno == 0:
@@ -59,7 +59,7 @@ def csc_t(x):
     else:
         return div.div_t(seno)
 
-
+#cotangente de x
 def cot_t(x):
     tangente = tan_t(x)
     if tangente == 0:
@@ -68,4 +68,4 @@ def cot_t(x):
         return div.div_t(tangente)
 
 
-print(cot_t(1))
+print(sin_t(1))

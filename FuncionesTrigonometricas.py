@@ -67,4 +67,3 @@ def cot_t(x):
     else:
         return div.div_t(tangente)
 
-print(cot_t(1))

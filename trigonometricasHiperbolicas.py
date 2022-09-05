@@ -1,15 +1,22 @@
 import div_fact as div
 import array as arr
 
+def power(base,exponente):
+    result = 1.0
+    while exponente != 0:
+        result *= base
+        exponente -= 1
+    return result
+
 def power_t(x,y):
     result=1.0
     exponenteI=y
     exponenteIterativo=abs(y)
     base = x
     if(exponenteI>0 and isinstance(exponenteI,int)):
-        result = div.pow_u(x, y)
+        result =  power(x, y)
     elif(exponenteI<0 and isinstance(exponenteI,int)):
-        potencia=div.pow_u(x, exponenteIterativo)
+        potencia= power(x, exponenteIterativo)
         result=div.div_t(potencia)
     elif isinstance(exponenteI,float) and exponenteI>0:
         result= base**exponenteI
@@ -63,20 +70,50 @@ def root_t(x, y):
         return "No es posible brindar una solucion real"
     return result
 
-def sinh(x, y):
-    result = 0.0
+def sinh(a):
+    arra = arr.array('f', [])
+    result = power_t(a, 1)
+    result_aux=result
+    arra.append(result)
+    for n in range(1, 2500):
+        i=2*n+1
+        fact = div.fact_t(i)
+        valor= power_t(a,i)*div.div_t(fact)
+        result_aux = result_aux + valor
+        arra.append(result_aux)
+        result=result_aux
+        if abs(arra[n] - arra[n-1]) < power_t(10,-8):
+            break
     return result
 
-def cosh(x, y):
-    result = 0.0
+def cosh(a):
+    arra = arr.array('f', [])
+    result = 1
+    result_aux = result
+    arra.append(result)
+    for n in range(1, 2500):
+        i = 2*n
+        fact = div.fact_t(i)
+        valor = power_t(a, i) * div.div_t(fact)
+        result_aux = result_aux + valor
+        arra.append(result_aux)
+        result = result_aux
+        if abs(arra[n] - arra[n - 1]) < power_t(10, -8):
+            break
     return result
 
-def tanh(x, y):
-    result = 0.0
+def tanh(a):
+    result = sinh(a)*div.div_t(cosh(a))
     return result
 
-print(power_t(3,0.0000132))
-
-print(root_t(-2,3))
-
-print(sqrt_t(0.2))
+# print(power(14,9))
+#
+# print(root_t(2,1/3))
+#
+# print(sqrt_t(0.2))
+#
+# print(sinh(0))
+#
+# print(cosh(0))
+#
+# print(tanh(2))

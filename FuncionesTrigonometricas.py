@@ -7,11 +7,11 @@ def sin_t(x):
         numerador = div.pow_u(-1, i) * div.pow_u(x, (2 * i) + 1)
         denominador = div.fact_t((2 * i) + 1)
         division = div.div_t(denominador)
-        sk = numerador * division
+        sk += numerador * division
         numerador1 = div.pow_u(-1, i + 1) * div.pow_u(x, (2 * (i + 1)) + 1)
         denominador1 = div.fact_t((2 * (i + 1)) + 1)
         division1 = div.div_t(denominador1)
-        sk1 = numerador1 * division1
+        sk1 = sk + (numerador1 * division1)
         if abs(sk1 - sk) < 10 ** (-18):
             break
     return sk
@@ -23,11 +23,11 @@ def cos_t(x):
         numerador = div.pow_u(-1, i) * div.pow_u(x, 2 * i)
         denominador = div.fact_t(2 * i)
         division = div.div_t(denominador)
-        sk = numerador * division
+        sk += numerador * division
         numerador1 = div.pow_u(-1, i + 1) * div.pow_u(x, 2 * (i + 1))
         denominador1 = div.fact_t(2 * (i + 1))
         division1 = div.div_t(denominador1)
-        sk1 = numerador1 * division1
+        sk1 = sk + (numerador1 * division1)
 
         if abs(sk1 - sk) < 10 ** (-18):
             break
@@ -67,3 +67,5 @@ def cot_t(x):
     else:
         return div.div_t(tangente)
 
+
+print(cot_t(1))

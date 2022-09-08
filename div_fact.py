@@ -13,7 +13,7 @@ def fact_t(x):
 
     result = 1
 
-    for i in range(1, x + 1):
+    for i in range(1, int(x) + 1):
         result = result * i
 
     return result
@@ -21,7 +21,7 @@ def fact_t(x):
 
 # Retorna el valor de 1/a, con a positivo diferente de 0
 def div_t(x):
-    if x < 0:
+    if x <= 0:
         return "Error: Solo numeros positivos"
 
     eps = 2.2204e-16
@@ -118,6 +118,11 @@ def asin_t(a):
             break
 
     return Sk1
+
+
+# Funcion que retorna el coseno inverso de a
+def acos_t(a):
+    return 0
 
 
 # Funcion que retorna la tangente inversa de a

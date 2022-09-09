@@ -1,4 +1,5 @@
 import div_fact as div
+import trigonometricasHiperbolicas as trigh
 
 
 # seno de x
@@ -13,7 +14,7 @@ def sin_t(x):
         denominador1 = div.fact_t((2 * (i + 1)) + 1)
         division1 = div.div_t(denominador1)
         sk1 = sk + (numerador1 * division1)
-        if abs(sk1 - sk) < 10 ** (-18):
+        if abs(sk1 - sk) < trigh.power_t(10, -8):
             break
     return sk
 
@@ -31,7 +32,7 @@ def cos_t(x):
         division1 = div.div_t(denominador1)
         sk1 = sk + (numerador1 * division1)
 
-        if abs(sk1 - sk) < 10 ** (-18):
+        if abs(sk1 - sk) < trigh.power_t(10, -8):
             break
     return sk
 

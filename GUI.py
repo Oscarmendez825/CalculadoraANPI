@@ -128,7 +128,7 @@ button = Button(ventana, text=".",
 button0 = Button(ventana, text="0",
                  command=lambda: set_input("0"), width=5, height=2)
 buttonPi = Button(ventana, text="PI",
-                  command=lambda: set_input("PI"), width=5, height=2)
+                  command=lambda: set_input("3.141592653589793"), width=5, height=2)
 
 
 senh = Button(ventana, text="senh(x)",

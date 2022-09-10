@@ -117,12 +117,17 @@ def asin_t(a):
         if error < 10**-8:
             break
 
-    return Sk1
+    return asin_t(a)
 
 
 # Funcion que retorna el coseno inverso de a
 def acos_t(a):
-    return 0
+    if a > 1 or a < -1:
+        return "Error: Los valores deben estar entre -1 y 1"
+
+    pi = 3.141592653589793
+
+    return pi*div_t(2) - asin_t(a)
 
 
 # Funcion que retorna la tangente inversa de a

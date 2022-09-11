@@ -94,8 +94,8 @@ def ln_t(x):
 def log_t(x, y):
     if x <= 0:
         return "Error: El arguento debe ser un numero positivo"
-    if y <= 1 or int(x) != x:
-        return "Error: La base debe ser entero positivo mayor a 1"
+    if y == 1 or y <= 0:
+        return "Error: La base debe ser positiva diferente de 1"
 
     return ln_t(x) * div_t(ln_t(y))
 
@@ -117,7 +117,7 @@ def asin_t(a):
         if error < 10**-8:
             break
 
-    return asin_t(a)
+    return Sk1
 
 
 # Funcion que retorna el coseno inverso de a

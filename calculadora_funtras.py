@@ -1,8 +1,6 @@
 from tkinter import *
 from tokenize import Number
-import div_fact as d
-import FuncionesTrigonometricas as f
-import trigonometricasHiperbolicas as h
+import funtras as f
 import re
 
 ventana = Tk()
@@ -88,17 +86,17 @@ def operate(func):
             float_y = float(number_y)
 
     if func == "senh":
-        result_str = str(h.sinh(float_x))
+        result_str = str(f.sinh(float_x))
     elif func == "cosh":
-        result_str = str(h.cosh(float_x))
+        result_str = str(f.cosh(float_x))
     elif func == "tanh":
-        result_str = str(h.tanh(float_x))
+        result_str = str(f.tanh(float_x))
     elif func == "asen":
-        result_str = str(d.asin_t(float_x))
+        result_str = str(f.asin_t(float_x))
     elif func == "acos":
-        result_str = str(d.acos_t(float_x))
+        result_str = str(f.acos_t(float_x))
     elif func == "atan":
-        result_str = str(d.atan_t(float_x))
+        result_str = str(f.atan_t(float_x))
     elif func == "sec":
         result_str = str(f.sec_t(float_x))
     elif func == "csc":
@@ -112,23 +110,23 @@ def operate(func):
     elif func == "tan":
         result_str = str(f.tan_t(float_x))
     elif func == "ln":
-        result_str = str(d.ln_t(float_x))
+        result_str = str(f.ln_t(float_x))
     elif func == "log10":
-        result_str = str(d.log_t(float_x, 10))
+        result_str = str(f.log_t(float_x, 10))
     elif func == "logy":
-        result_str = str(d.log_t(float_x, float_y))
+        result_str = str(f.log_t(float_x, float_y))
     elif func == "1/x":
-        result_str = str(d.div_t(float_x))
+        result_str = str(f.div_t(float_x))
     elif func == "sqrt":
-        result_str = str(h.sqrt_t(float_x))
+        result_str = str(f.sqrt_t(float_x))
     elif func == "sqrty":
-        result_str = str(h.root_t(float_x, float_y))
+        result_str = str(f.root_t(float_x, float_y))
     elif func == "exp":
-        result_str = str(d.exp_t(float_x))
+        result_str = str(f.exp_t(float_x))
     elif func == "x^y":
-        result_str = str(h.power_t(float_x, float_y))
+        result_str = str(f.power_t(float_x, float_y))
     elif func == "x!":
-        result_str = str(d.fact_t(float_x))
+        result_str = str(f.fact_t(float_x))
 
     result_entry.config(state="normal", fg="#efefef")
     if len(re.findall("Error", result_str)) > 0:

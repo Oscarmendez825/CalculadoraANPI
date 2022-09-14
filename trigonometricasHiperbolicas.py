@@ -1,4 +1,4 @@
-import div_fact as div
+import funtras as div
 import array as arr
 
 

@@ -1,15 +1,24 @@
 import array as arr
 
 
-# Power Unsigned
 def pow_u(x, p):
+    """
+    Funcion encargada de calcular la potencia de un numero
+    :param x: base
+    :param p: exponente
+    :return: resultado
+    """
     if p < 0 or int(p) != p:
         return "Error: Solo exponentes enteros positivos"
     return pow(x, p)
 
 
-# Funcion que retorna el factorial, solo acepta numeros naturales
 def fact_t(x):
+    """
+    Funcion encargada de calcular el factorial de un numero
+    :param x: numero al que se le calcula el factorial
+    :return: resultado del factorial
+    """
     if x < 0 or int(x) != x:
         return "Error: Solo numeros naturales"
 
@@ -21,8 +30,12 @@ def fact_t(x):
     return result
 
 
-# Retorna el valor de 1/a, con a positivo diferente de 0
 def div_t(x):
+    """
+    Funcion encargada de calcular la division de 1/a
+    :param x: divisor
+    :return: resultado de la division
+    """
     if x <= 0:
         return "Error: Solo numeros positivos"
 
@@ -48,14 +61,18 @@ def div_t(x):
         x1 = x0 * (2 - (x * x0))
 
         error = abs(x1 - x0)
-        if error < (10**-8) * abs(x1):
+        if error < (10 ** -8) * abs(x1):
             break
 
     return x1
 
 
-# Funcion que retorna el valor de e^a
 def exp_t(a):
+    """
+    Funcion que calcula la operacion e^a
+    :param a: exponente a utilizar
+    :return: resultado de la potencia de e^a
+    """
     Sk = 0
     Sk1 = pow_u(a, 0) * div_t(fact_t(0))
 
@@ -65,35 +82,44 @@ def exp_t(a):
         Sk1 += pow_u(a, k) * div_t(fact_t(k))
 
         error = abs(Sk1 - Sk)
-        if error < 10**-8:
+        if error < 10 ** -8:
             break
 
     return Sk1
 
 
-# Funcion que retorna el valor de logaritmo natural de x
 def ln_t(x):
+    """
+    Funcion que se encarga de calcular el logaritmo natural de un numero x
+    :param x: numero al que se le desea calcular el logaritmo
+    :return: resultado del logaritmo natural
+    """
     if x <= 0:
         return "Error: Solo numeros positivos"
 
-    coef = 2*(x-1)*div_t(x+1)
+    coef = 2 * (x - 1) * div_t(x + 1)
     Sk = 0
     Sk1 = coef
 
     for k in range(1, 2500):
 
         Sk = Sk1
-        Sk1 += coef * (1*div_t(2*k+1)) * pow_u((x-1)*div_t(x+1), 2*k)
+        Sk1 += coef * (1 * div_t(2 * k + 1)) * pow_u((x - 1) * div_t(x + 1), 2 * k)
 
         error = abs(Sk1 - Sk)
-        if error < 10**-8:
+        if error < 10 ** -8:
             break
 
     return Sk1
 
 
-# Funcion que retorna el logaritmo en base y de x
 def log_t(x, y):
+    """
+    Funcion que se encarga de calcular el logaritmo en una base de un numero
+    :param x: numero que al que se desea calcular el logaritmo
+    :param y: base del logaritmo
+    :return: resultado del logaritmo
+    """
     if x <= 0:
         return "Error: El arguento debe ser un numero positivo"
     if y == 1 or y <= 0:
@@ -102,8 +128,12 @@ def log_t(x, y):
     return ln_t(x) * div_t(ln_t(y))
 
 
-# Funcion que retorna el seno inverso de a
 def asin_t(a):
+    """
+    Funcion que calcula el arcsen de un numero
+    :param a: numero al que se le desea calcular el arcseno
+    :return: resultado del arcseno de un numero
+    """
     if a > 1 or a < -1:
         return "Error: Los valores deben estar entre -1 y 1"
     Sk = 0
@@ -112,60 +142,72 @@ def asin_t(a):
     for k in range(1, 2500):
 
         Sk = Sk1
-        denm = div_t(pow_u(4, k) * pow_u(fact_t(k), 2) * (2*k+1))
-        Sk1 += fact_t(2*k) * pow_u(a, 2*k+1) * denm
+        denm = div_t(pow_u(4, k) * pow_u(fact_t(k), 2) * (2 * k + 1))
+        Sk1 += fact_t(2 * k) * pow_u(a, 2 * k + 1) * denm
 
         error = abs(Sk1 - Sk)
-        if error < 10**-8:
+        if error < 10 ** -8:
             break
 
     return Sk1
 
 
-# Funcion que retorna el coseno inverso de a
 def acos_t(a):
+    """
+    Funcion que calcula el arccoseno de un numero
+    :param a: numero al que se le desea calcular el arccoseno
+    :return: resultado del arccoseno de un numero
+    """
     if a > 1 or a < -1:
         return "Error: Los valores deben estar entre -1 y 1"
 
     pi = 3.141592653589793
 
-    return pi*div_t(2) - asin_t(a)
+    return pi * div_t(2) - asin_t(a)
 
 
-# Funcion que retorna la tangente inversa de a
 def atan_t(a):
+    """
+    Funcion que calcula el arctangente de un numero
+    :param a: numero al que se le desea calcular el arctangente
+    :return: resultado del arctangente de un numero
+    """
     Sk = 0
     Sk1 = 0
     pi = 3.141592653589793
 
     if a > 1:
-        Sk1 += pi*div_t(2) - div_t(a)
+        Sk1 += pi * div_t(2) - div_t(a)
     elif a < -1:
-        Sk1 += -pi*div_t(2) + div_t(-a)
+        Sk1 += -pi * div_t(2) + div_t(-a)
     else:
         Sk1 = a
 
     for k in range(1, 2500):
 
-        comun = pow_u(-1, k) * div_t(2*k+1)
+        comun = pow_u(-1, k) * div_t(2 * k + 1)
         Sk = Sk1
 
         if a > 1:
-            Sk1 += comun * div_t(pow_u(a, 2*k+1))
+            Sk1 += comun * div_t(pow_u(a, 2 * k + 1))
         elif a < -1:
-            Sk1 += comun * (-div_t(pow_u(-a, 2*k+1)))
+            Sk1 += comun * (-div_t(pow_u(-a, 2 * k + 1)))
         else:
-            Sk1 += comun * pow_u(a, 2*k+1)
+            Sk1 += comun * pow_u(a, 2 * k + 1)
 
         error = abs(Sk1 - Sk)
-        if error < 10**-8:
+        if error < 10 ** -8:
             break
 
     return Sk1
 
 
-# seno de x
 def sin_t(x):
+    """
+    Funcion que calcula el seno de un numero
+    :param x: numero al que se le desea calcular el seno
+    :return: resultado del seno de un numero
+    """
     sk = 0.0
     for i in range(0, 2500):
         numerador = pow_u(-1, i) * pow_u(x, (2 * i) + 1)
@@ -181,8 +223,12 @@ def sin_t(x):
     return sk
 
 
-# coseno de x
 def cos_t(x):
+    """
+    Funcion que calcula el coseno de un numero
+    :param x: numero al que se le desea calcular el coseno
+    :return: resultado del coseno de un numero
+    """
     sk = 0.0
     for i in range(0, 2500):
         numerador = pow_u(-1, i) * pow_u(x, 2 * i)
@@ -199,8 +245,12 @@ def cos_t(x):
     return sk
 
 
-# tangente de x
 def tan_t(x):
+    """
+    Funcion que calcula la tangente de un numero
+    :param x: numero al que se le calcula la tangente
+    :return: resultado de la tangente de un numero
+    """
     numerador = sin_t(x)
     denominador = cos_t(x)
     if denominador == 0:
@@ -213,8 +263,12 @@ def tan_t(x):
         return numerador * division
 
 
-# secante de x
 def sec_t(x):
+    """
+    Funcion que calcula la secante de un numero
+    :param x: numero al que se le desea calcular la secante
+    :return: resultado de la secante de un numero
+    """
     coseno = cos_t(x)
     if coseno == 0:
         return "Error: No se permiten valores multiplos de pi/2"
@@ -225,8 +279,12 @@ def sec_t(x):
             return -div_t(-coseno)
 
 
-# cosecante de x
 def csc_t(x):
+    """
+    Funcion que calcula la cosecante de un numero
+    :param x: numero al que se le desea calcular la cosecante
+    :return: resultado de la cosecante de un numero
+    """
     seno = sin_t(x)
     if seno == 0:
         return "Error: No se permiten valores multiplos de pi o cero"
@@ -237,8 +295,12 @@ def csc_t(x):
             return -div_t(-seno)
 
 
-# cotangente de x
 def cot_t(x):
+    """
+    Funcion que calcula la cotangente de un numero
+    :param x: numero al que se le desea calcular la cotangente
+    :return: resultado de la cotangente de un numero
+    """
     tangente = tan_t(x)
     if tangente == 0:
         return "Error: No se permiten valores multiplos de pi o cero"
@@ -250,6 +312,12 @@ def cot_t(x):
 
 
 def power(base, exponente):
+    """
+    Funcion que calcula la potencia de un numero
+    :param base: base de la potencia
+    :param exponente: exponente de la potencia
+    :return: resultado de la potencia de un numero
+    """
     result = 1.0
     while exponente != 0:
         result *= base
@@ -258,17 +326,23 @@ def power(base, exponente):
 
 
 def power_t(x, y):
+    """
+    Funcion principal que calcula la potencia de un numero
+    :param x: base de la potencia
+    :param y: exponente de la potencia
+    :return: resultado de la potencia
+    """
     result = 1.0
     exponenteI = y
     exponenteIterativo = abs(y)
     base = x
-    if(exponenteI > 0 and isinstance(exponenteI, int)):
+    if (exponenteI > 0 and isinstance(exponenteI, int)):
         result = power(x, y)
-    elif(exponenteI < 0 and isinstance(exponenteI, int)):
+    elif (exponenteI < 0 and isinstance(exponenteI, int)):
         potencia = power(x, exponenteIterativo)
         result = div_t(potencia)
     elif isinstance(exponenteI, float) and exponenteI > 0:
-        result = base**exponenteI
+        result = base ** exponenteI
     elif isinstance(exponenteI, float) and exponenteI < 0:
         result = base ** abs(exponenteI)
         result = div_t(result)
@@ -276,15 +350,20 @@ def power_t(x, y):
 
 
 def sqrt_t(x):
+    """
+    Funcion que calcula la raiz cuadrada de un numero
+    :param x: numero al que se le desea calcular la raiz
+    :return: raiz numerica de un numero
+    """
     result = 0.0
     a = arr.array('f', [])
-    if(x >= 0):
+    if (x >= 0):
         xk = x * div_t(2)
         xk1 = xk - (power_t(xk, 2) - x) * div_t(2 * power_t(xk, 2 - 1))
         a.append(xk)
         for i in range(0, 2500):
             xk1 = a[i] - (power_t(a[i], 2) - x) * \
-                div_t(2 * power_t(a[i], 2 - 1))
+                  div_t(2 * power_t(a[i], 2 - 1))
             a.append(xk1)
             result = a[i]
             if abs(a[i + 1] - a[i]) < power_t(10, -8) * abs(a[i + 1]):
@@ -295,27 +374,33 @@ def sqrt_t(x):
 
 
 def root_t(x, y):
+    """
+    Funcion que calcula la raiz de un numero
+    :param x: radicando de la raiz
+    :param y: indice de la raiz
+    :return: resultado de la raiz y de x
+    """
     result = 0.0
     a = arr.array('f', [])
-    xk = x*div_t(2)
+    xk = x * div_t(2)
 
-    if(isinstance(y, int) and x >= 0):
+    if (isinstance(y, int) and x >= 0):
         xk1 = xk - (power_t(xk, y) - x) * div_t(y * power_t(xk, y - 1))
         a.append(xk)
         for i in range(0, 2500):
-            xk1 = a[i] - (power_t(a[i], y)-x)*div_t(y*power_t(a[i], y-1))
+            xk1 = a[i] - (power_t(a[i], y) - x) * div_t(y * power_t(a[i], y - 1))
             a.append(xk1)
             result = a[i]
-            if abs(a[i+1] - a[i]) < power_t(10, -8) * abs(a[i+1]):
+            if abs(a[i + 1] - a[i]) < power_t(10, -8) * abs(a[i + 1]):
                 break
     elif (isinstance(y, float)):
-        result = power_t(x, 1/y)
+        result = power_t(x, 1 / y)
     elif (isinstance(y, int) and y % 2 != 0 and x <= 0):
         xk1 = xk - (power_t(xk, y) - x) * div_t(y * power_t(xk, y - 1))
         a.append(xk)
         for i in range(0, 2500):
             xk1 = a[i] - (power_t(a[i], y) - x) * \
-                div_t(y * power_t(a[i], y - 1))
+                  div_t(y * power_t(a[i], y - 1))
             a.append(xk1)
             result = a[i]
             if abs(a[i + 1] - a[i]) < power_t(10, -8) * abs(a[i + 1]):
@@ -326,29 +411,39 @@ def root_t(x, y):
 
 
 def sinh(a):
+    """
+    Funcion que calcula el seno hiperbolico de un numero
+    :param a: numero al que se le desea calcular el seno hiperbolico
+    :return: resultado del seno hiperbolico de un numero
+    """
     arra = arr.array('f', [])
     result = power_t(a, 1)
     result_aux = result
     arra.append(result)
     for n in range(1, 2500):
-        i = 2*n+1
+        i = 2 * n + 1
         fact = fact_t(i)
-        valor = power_t(a, i)*div_t(fact)
+        valor = power_t(a, i) * div_t(fact)
         result_aux = result_aux + valor
         arra.append(result_aux)
         result = result_aux
-        if abs(arra[n] - arra[n-1]) < power_t(10, -8):
+        if abs(arra[n] - arra[n - 1]) < power_t(10, -8):
             break
     return result
 
 
 def cosh(a):
+    """
+    Funcion que calcula el coseno hiperbolico de un numero
+    :param a: numero al que se le desea calcular el coseno hiperbolico
+    :return: resultado del coseno hiperbolico de un numero
+    """
     arra = arr.array('f', [])
     result = 1
     result_aux = result
     arra.append(result)
     for n in range(1, 2500):
-        i = 2*n
+        i = 2 * n
         fact = fact_t(i)
         valor = power_t(a, i) * div_t(fact)
         result_aux = result_aux + valor
@@ -360,5 +455,10 @@ def cosh(a):
 
 
 def tanh(a):
-    result = sinh(a)*div_t(cosh(a))
+    """
+    Funcion que calcula la tangente hiperbolica de un numero
+    :param a: numero al que se le desea calcular la tangente hiperbolica
+    :return: resultado de la tangente hiperbolica de un numero
+    """
+    result = sinh(a) * div_t(cosh(a))
     return result

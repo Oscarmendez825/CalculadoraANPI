@@ -1,18 +1,32 @@
+# INSTITUTO TECNOLÓGICO DE COSTA RICA
+# Análisis Numérico para Ingeniería
+#
+# Calculadora FUNTRAS
+#
+# Desarrollado por Brandon Gómez, Oscar Méndez & Simón Fallas
+
+
 from tkinter import *
-from tokenize import Number
 import funtras as f
 import re
+
 
 ventana = Tk()
 ventana.title("Calculadora ANPI")
 ventana['bg'] = "#3f3f3f"
 
 
-# FUNCIONES PARA LOS BOTONES
+# FUNCIONES PARA LOS BOTONES DE LA INTERFAZ
 
 
-# Inserta el un numero en la entrada seleccionada
 def set_input(value):
+    """
+    Función que inserta un valor en la entrada seleccionada (X o Y), 
+    ya sea ingresado por teclado o con los botones numéricos.
+    Si no hay entrada seleccionada se utiliza por defecto la entrada X.
+    :param value: Caracter a ingresarse en la entrada
+    """
+
     name = str(ventana.focus_get()).split(".")[-1]
     if name == "x_input" or name == "y_input":
         ventana.focus_get().insert(END, value)
@@ -22,8 +36,11 @@ def set_input(value):
     return
 
 
-# Limpia la entrada seleccionada
 def clear_input(name):
+    """
+    Función que limpia la entrada correspiendente al botón presionado.
+    :param name: Nombre de la entrada a ser limpiada
+    """
     if name == "x":
         x_entry.delete(0, END)
     if name == "y":
@@ -31,16 +48,27 @@ def clear_input(name):
     return
 
 
-# Valida los valores de las entradas
 def is_valid(entry):
+    """
+    Función que utiliza expresiones regulares para determinar si la entrada
+    ingresada por el usuario corresponde a un valor válido.
+    :param entry: String a ser evaluado.
+    :return: Verdadero si el valor ingresado es válido, falso en caso contrario
+    """
     pattern = re.compile("^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)?\s*(PI)*$")
     if pattern.match(entry) is not None and entry != "":
         return True
     return False
 
 
-# Realiza la operacion y muestra el resultado
 def operate(func):
+    """
+    Función que se llama cada vez que se desea operar el valor ingresado con la 
+    función seleccionada. Luego de validadas las entradas se llama a la función
+    correspondiente y se muestra el resultado en la interfaz. Si se encontrase 
+    alguna clase de error este se notifica en la misma salida.
+    :param func: Función con la que se desea operar el valor.
+    """
     result_str = ""
     number_x = x_entry.get()
     number_y = y_entry.get()
@@ -136,8 +164,10 @@ def operate(func):
     result_entry.config(state="readonly")
 
 
-# Abre la ventana de ayuda
 def openHelp():
+    """
+    Función que abre una nueva ventana con información de ayuda para el usuario.
+    """
     ayuda = Toplevel(ventana)
     ayuda.title("Ayuda - Calculadora ANPI")
     ayuda["bg"] = "#3f3f3f"
@@ -188,7 +218,9 @@ se actualizará cada vez que se realice una operación nueva.
           bg="#3f3f3f", fg="#efefef", anchor="w", justify=LEFT).pack()
 
 
-# INPUT/OUTPUT
+# CREACION DE LOS WIDGETS RELACIONADOS CON ENTRADAS Y SALIDAS
+
+
 x_entry = Entry(ventana, name="x_input", font="Arial 12",
                 bg="#3f3f3f", fg="#efefef", insertbackground="#efefef")
 y_entry = Entry(ventana, name="y_input", font="Arial 12",
@@ -210,7 +242,8 @@ y_label.grid(row=1, column=0, columnspan=1, pady=5)
 result_label.grid(row=2, column=0, columnspan=1, pady=20)
 
 
-# BOTONES
+# CREACION DE LOS BOTONES
+
 
 help_button = Button(ventana, text="Ayuda", bg="#4f4f4f", fg="#00bbff", relief=FLAT,
                      command=lambda: openHelp(), width=8, font="Arial 12 italic")

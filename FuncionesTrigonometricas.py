@@ -1,5 +1,4 @@
-import div_fact as div
-import trigonometricasHiperbolicas as trigh
+import funtras as div
 
 
 # seno de x
@@ -42,9 +41,12 @@ def tan_t(x):
     numerador = sin_t(x)
     denominador = cos_t(x)
     if denominador == 0:
-        print("La funcion se indefine")
+        return "Error: No se permiten valores multiplos de pi/2"
     else:
-        division = div.div_t(denominador)
+        if denominador < 0:
+            division = -div.div_t(-denominador)
+        else:
+            division = div.div_t(denominador)
         return numerador * division
 
 
@@ -52,24 +54,33 @@ def tan_t(x):
 def sec_t(x):
     coseno = cos_t(x)
     if coseno == 0:
-        print("La funcion se indefine")
+        return "Error: No se permiten valores multiplos de pi/2"
     else:
-        return div.div_t(coseno)
+        if coseno > 0:
+            return div.div_t(coseno)
+        else:
+            return -div.div_t(-coseno)
 
 
 # cosecante de x
 def csc_t(x):
     seno = sin_t(x)
     if seno == 0:
-        print("La funcion se indefine")
+        return "Error: No se permiten valores multiplos de pi o cero"
     else:
-        return div.div_t(seno)
+        if seno > 0:
+            return div.div_t(seno)
+        else:
+            return -div.div_t(-seno)
 
 
 # cotangente de x
 def cot_t(x):
     tangente = tan_t(x)
     if tangente == 0:
-        print("La funcion se indefine")
+        return "Error: No se permiten valores multiplos de pi o cero"
     else:
-        return div.div_t(tangente)
+        if tangente > 0:
+            return div.div_t(tangente)
+        else:
+            return -div.div_t(-tangente)
